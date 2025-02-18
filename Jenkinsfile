@@ -20,6 +20,13 @@ pipeline {
                 }
             }
         }
+
+        stage('Push Image to Docker Hub') {
+            steps {
+                withDockerRegistry([credentialsId: 'dockerhub', url: '']) {
+                    sh 'docker push xclusive001/fruit-app:$BUILD_NUMBER'
+                }
+            }
+        }
     }
 }
-
